@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#07070D">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://tibbirreserve.xyz/"><!-- TODO: confirm final domain -->
-<meta property="og:url" content="https://tibbirreserve.xyz/">
+<meta property="og:url" content="https://tibbirreserve.xyz/"><!-- TODO: confirm final domain -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tibbir Reserve ($TSR)">
 <meta property="og:description" content="Hold TSR. Stack TIBBIR. The decentralized strategic reserve of TIBBIR holders, on Base.">
@@ -19,7 +19,7 @@
 <meta name="twitter:site" content="@TibbirReserve">
 <meta name="twitter:title" content="Tibbir Reserve ($TSR)">
 <meta name="twitter:description" content="Hold TSR. Stack TIBBIR. Slowly, then all at once.">
-<meta name="twitter:image" content="https://tibbirreserve.xyz/assets/banner.png">
+<meta name="twitter:image" content="https://tibbirreserve.xyz/assets/banner.png"><!-- TODO: confirm final domain -->
 <link rel="icon" href="./assets/logo.png" type="image/png">
 <link rel="apple-touch-icon" href="./assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -319,7 +319,7 @@ footer .disc{margin-top:20px;font-size:13px}
       <div class="tile"><span class="k">Mcap</span><span class="v" data-v="mcap">—</span><span class="tag" data-tag="dex">loading</span></div>
       <div class="tile"><span class="k">Liquidity</span><span class="v" data-v="liq">—</span><span class="tag" data-tag="dex">loading</span></div>
       <div class="tile"><span class="k">24h Vol</span><span class="v" data-v="vol">—</span><span class="tag" data-tag="dex">loading</span></div>
-      <div class="tile burn"><span class="k">TSR burned · forever</span><span class="v iri" data-v="burn">—</span><span class="d" data-v="burnPct"></span><span class="tag" data-tag="rpc">loading</span></div>
+      <div class="tile burn"><span class="k">TSR burned</span><span class="v iri" data-v="burn">—</span><span class="d" data-v="burnPct"></span><span class="tag" data-tag="rpc">loading</span></div>
       <div class="tile cd"><span class="k">Dev unlock in</span><span class="v" data-v="cd" aria-live="off">—</span><span class="d">6 Sept 2027 · UTC</span><span class="tag">clock</span></div>
     </div>
   </div>
@@ -395,7 +395,7 @@ footer .disc{margin-top:20px;font-size:13px}
       <div class="card rv">
         <img class="avatar" src="./assets/logo.png" width="120" height="120" alt="TIBBIR logo" loading="lazy" onerror="this.style.display='none'">
         <h3 style="margin-top:16px">The frog</h3>
-        <p style="color:var(--muted);margin-top:8px">TIBBIR is a Base memecoin: a rainbow chameleon-frog, a pixel sidekick with green hair and a “T” chain, and a full moon it refuses to stop staring at. The full lore is TIBBIR’s to tell.</p>
+        <p style="color:var(--muted);margin-top:8px">TIBBIR is the token the Reserve accumulates: a rainbow chameleon-frog, a pixel sidekick with green hair and a “T” chain, and a full moon it refuses to stop staring at. The full lore is TIBBIR’s to tell.</p>
         <!-- TODO: confirm TIBBIR origin story, launch date, TIBBIR CA and official channel links from fetched sources; add the "TIBBIR on X" button below once confirmed -->
         <div class="links">
           <a class="btn sm" href="https://x.com/TibbirReserve" target="_blank" rel="noopener">Reserve on X</a>
@@ -404,7 +404,7 @@ footer .disc{margin-top:20px;font-size:13px}
       <div class="card rv">
         <h3>Why a Reserve</h3>
         <p style="color:var(--muted);margin-top:8px">Most people want more TIBBIR without watching charts all day. TSR turns its own trading activity into a standing TIBBIR position for its holders, with part of every fee burning TSR along the way.</p>
-        <p style="color:var(--muted)">The decentralized strategic reserve of TIBBIR holders. Not a treasury with a key. A contract with a rule.</p>
+        <p style="color:var(--muted)">The decentralized strategic reserve of TIBBIR holders. A contract with a rule.</p><!-- TODO: only claim "no admin key" / renounced ownership after verifying owner() on Basescan -->
       </div>
     </div>
   </div>
@@ -418,7 +418,7 @@ footer .disc{margin-top:20px;font-size:13px}
     <div class="sec-head rv">
       <p class="eyebrow">Transparency</p>
       <h2 id="trH">Onchain, or it didn’t happen</h2>
-      <p>Values marked <span class="tag live">live</span> are read from Base every 60 seconds. Values marked <span class="tag">snapshot</span> are from basestonk as of 29 Sept 2026.</p>
+      <p>Values marked <span class="tag live">live</span> refresh every 60 seconds from DexScreener (market) and the Base RPC (supply). Values marked <span class="tag">snapshot</span> are from basestonk as of 29 Sept 2026. Values marked <span class="tag">clock</span> come from your device time.</p>
     </div>
     <div class="grid2">
       <div class="card rv">
@@ -441,11 +441,11 @@ footer .disc{margin-top:20px;font-size:13px}
       <div class="card rv">
         <h3>Dev lock</h3>
         <p class="big" style="margin-top:12px">47.71M TSR <span class="tag">snapshot</span></p>
-        <p style="color:var(--muted);font-size:14px;margin-top:4px">The dev buy. 4.8% of supply, locked for twelve months. Nobody gets to be early twice.</p>
+        <p style="color:var(--muted);font-size:14px;margin-top:4px">The dev buy. 4.77% of supply, locked for twelve months. Nobody gets to be early twice.</p>
         <div class="prog" role="progressbar" aria-label="Lock period elapsed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="lockProg"><i></i></div>
         <dl class="kv">
           <dt>Released</dt><dd>0% <span class="tag">snapshot</span></dd>
-          <dt>Time elapsed</dt><dd><span data-v="elapsed">—</span> <span class="tag live">live</span></dd>
+          <dt>Time elapsed</dt><dd><span data-v="elapsed">—</span> <span class="tag">clock</span></dd>
           <dt>Start</dt><dd>6 Sept 2026</dd>
           <dt>End</dt><dd>6 Sept 2027</dd>
         </dl>
@@ -461,7 +461,7 @@ footer .disc{margin-top:20px;font-size:13px}
         <tbody>
           <tr><td>$TSR token</td><td><code>0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222</code></td><td class="act"><button class="ico copy" type="button" data-copy="0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" aria-label="Copy token address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><a class="ico" href="https://basescan.org/token/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="Token on Basescan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
           <tr><td>Burn address</td><td><code>0x000000000000000000000000000000000000dEaD</code></td><td class="act"><button class="ico copy" type="button" data-copy="0x000000000000000000000000000000000000dEaD" aria-label="Copy burn address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><a class="ico" href="https://basescan.org/token/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222?a=0x000000000000000000000000000000000000dEaD" target="_blank" rel="noopener" aria-label="Burn address on Basescan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
-          <tr id="lpRow"><td>Liquidity pool</td><td><code data-v="pair">read from DexScreener…</code></td><td class="act"><span class="tag" data-tag="dex">loading</span><button class="ico copy" type="button" data-copy="" aria-label="Copy pool address" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><a class="ico" href="https://dexscreener.com/base/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="Pool on Basescan" data-v="pairLink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
+          <tr id="lpRow"><td>Liquidity pool</td><td><code data-v="pair">read from DexScreener…</code></td><td class="act"><span class="tag" data-tag="dex">loading</span><button class="ico copy" type="button" data-copy="" aria-label="Copy pool address" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><a class="ico" href="https://dexscreener.com/base/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="Pool on DexScreener" data-v="pairLink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
           <tr><td>Dev lock (vesting)</td><td><span style="color:var(--muted)">address listed on basestonk</span></td><td class="act"><span class="tag">snapshot</span><a class="ico" href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="Vesting contract on basestonk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
           <!-- TODO: basestonk lists 4 contracts/wallets. Confirm labels and addresses (vesting/lock contract, LP, fee router or other) and replace the two unconfirmed rows -->
         </tbody>
@@ -469,16 +469,16 @@ footer .disc{margin-top:20px;font-size:13px}
     </div>
 
     <div class="card rv" style="margin-top:16px">
-      <h3>Launch config</h3>
+      <h3>Key parameters</h3>
       <ul class="list" style="margin-top:12px">
-        <li><span>Launchpad</span><span>basestonk</span></li>
+        <li><span>Token page</span><span>basestonk</span></li>
         <li><span>Buy fee</span><span>3.3%</span></li>
         <li><span>Sell fee</span><span>3.3%</span></li>
         <li><span>Fee routing</span><span>TIBBIR reflections + TSR burn</span></li>
         <li><span>Dev buy</span><span>47.71M TSR · locked 6 Sept 2026 → 6 Sept 2027</span></li>
       </ul>
       <!-- TODO: basestonk shows 5 active launch-config items. Confirm the exact labels/values and replace this list one-to-one -->
-      <p style="color:var(--muted);font-size:13px;margin-top:12px"><span class="tag">snapshot</span> · full config on <a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">basestonk</a></p>
+      <p style="color:var(--muted);font-size:13px;margin-top:12px"><span class="tag">snapshot</span> · the full launch config (5 items) is on <a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">basestonk</a></p>
     </div>
   </div>
 </section>
@@ -492,7 +492,7 @@ footer .disc{margin-top:20px;font-size:13px}
       <p>Four steps. The fourth one is the one people skip and regret.</p>
     </div>
     <ol class="steps rv">
-      <li><h3>Get a wallet</h3><p>Any Base-compatible wallet works: Coinbase Wallet, Rabby, MetaMask. Write the seed phrase down, not in a screenshot.</p></li>
+      <li><h3>Get a wallet</h3><p>Any self-custody wallet that supports the Base network. Write the seed phrase down, not in a screenshot.</p></li>
       <li><h3>Put ETH on Base</h3><p>Bridge from Ethereum or withdraw straight to Base from an exchange that supports it. You need a little extra for gas.</p></li>
       <li><h3>Open the basestonk page</h3><p>Trade from the official <a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">$TSR page on basestonk</a>. The 3.3% fee applies on every buy and sell.</p></li>
       <li><h3>Verify the CA</h3><p>Compare the contract address character by character before you sign. Same ticker does not mean same token.</p></li>
@@ -512,10 +512,10 @@ footer .disc{margin-top:20px;font-size:13px}
       <h2 id="faqH">Questions, answered dryly</h2>
     </div>
     <div class="faq rv">
-      <details><summary>What is TSR?</summary><div class="a">Tibbir Reserve is a token on Base. Hold it and you accumulate $TIBBIR from the fees on TSR trades. Part of the same fee burns TSR, so the supply only goes one way.</div></details>
-      <details><summary>How do I receive TIBBIR?</summary><div class="a">Reflections come from the fee routing in the contract. Whether they land in your wallet automatically or need a claim is stated on the basestonk page. Check there before you assume.<!-- TODO: confirm auto-distribution vs claim from basestonk / X --></div></details>
-      <details><summary>Why burn?</summary><div class="a">Burned TSR goes to the dead address and never comes back. Fewer TSR in existence means each remaining TSR is a larger slice of future reflections. Simple, boring, permanent.</div></details>
-      <details><summary>Is the dev supply locked?</summary><div class="a">Yes. The dev buy of 47.71M TSR (4.8% of supply) is locked from 6 Sept 2026 to 6 Sept 2027, with 0% released as of 29 Sept 2026. The countdown at the top runs to the unlock date.</div></details>
+      <details><summary>What is TSR?</summary><div class="a">Tibbir Reserve is a token on Base. Hold it and you accumulate $TIBBIR from the fees on TSR trades. Part of the same fee burns TSR, so each holder’s share of the reflections grows.</div></details>
+      <details><summary>How do I receive TIBBIR?</summary><div class="a">Reflections are funded by the trading fee. Whether they land in your wallet automatically or need a claim is stated on the basestonk page. Check there before you assume.<!-- TODO: confirm auto-distribution vs claim from basestonk / X --></div></details>
+      <details><summary>Why burn?</summary><div class="a">Burned TSR goes to the dead address and never comes back. Fewer TSR in existence means each remaining TSR is a larger slice of future reflections. Simple and boring.</div></details>
+      <details><summary>Is the dev supply locked?</summary><div class="a">Yes. The dev buy of 47.71M TSR (4.77% of supply) is locked from 6 Sept 2026 to 6 Sept 2027, with 0% released as of 29 Sept 2026. The countdown at the top runs to the unlock date.</div></details>
       <details><summary>What are the fees?</summary><div class="a">3.3% on buys and 3.3% on sells. The fee is what funds the TIBBIR reflections and the TSR burn. No fee, no reserve.</div></details>
       <details><summary>Where can I trade?</summary><div class="a">On the <a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">basestonk page</a>, or through any Base DEX aggregator that routes to the pool. Chart on <a href="https://dexscreener.com/base/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">DexScreener</a>. Verify the CA either way.</div></details>
     </div>
@@ -580,13 +580,14 @@ function setTag(name,kind,text){$$('[data-tag="'+name+'"]').forEach(function(el)
 function tagOk(name,at){var age=Date.now()-at;if(age>STALE)setTag(name,'stale','stale · '+Math.round(age/60000)+'m');else setTag(name,'live','live')}
 
 /* ---------- counters ---------- */
-var ticked={};
+var ticked={},gen={};
 function setV(name,text){$$('[data-v="'+name+'"]').forEach(function(el){el.textContent=text})}
 function tick(name,value,fmt){
   var els=$$('[data-v="'+name+'"]');if(!els.length)return;
+  var g=gen[name]=(gen[name]||0)+1; // a newer value cancels any running count-up
   if(reduced||ticked[name]||!isFinite(value)){els.forEach(function(e){e.textContent=fmt(value)});ticked[name]=true;return}
   ticked[name]=true;var t0=performance.now(),D=700;
-  (function step(t){var k=Math.min(1,(t-t0)/D);k=1-Math.pow(1-k,3);var v=value*k;els.forEach(function(e){e.textContent=fmt(v)});if(k<1)requestAnimationFrame(step)})(t0);
+  (function step(t){if(gen[name]!==g)return;var k=Math.min(1,(t-t0)/D);k=1-Math.pow(1-k,3);var v=value*k;els.forEach(function(e){e.textContent=fmt(v)});if(k<1)requestAnimationFrame(step)})(t0);
 }
 
 /* ---------- DexScreener ---------- */
@@ -608,7 +609,7 @@ function fetchDex(){
     tick('vol',vl,function(v){return usd(v)||'—'});
     var chEl=$('[data-v="chg"]');
     if(isFinite(ch)){chEl.textContent=(ch>=0?'+':'')+fix2.format(ch)+'% 24h';chEl.className='d '+(ch>=0?'up':'down')}else{chEl.textContent='';chEl.className='d'}
-    if(p.pairAddress){setV('pair',p.pairAddress);var lp=$('#lpRow');var cb=$('.copy',lp);cb.hidden=false;cb.setAttribute('data-copy',p.pairAddress);$('[data-v="pairLink"]').href='https://basescan.org/address/'+p.pairAddress}
+    if(p.pairAddress){setV('pair',p.pairAddress);var lp=$('#lpRow');var cb=$('.copy',lp);cb.hidden=false;cb.setAttribute('data-copy',p.pairAddress);var pl=$('[data-v="pairLink"]');pl.href='https://basescan.org/address/'+p.pairAddress;pl.setAttribute('aria-label','Pool on Basescan')}
     state.dexAt=Date.now();state.dexOk=true;tagOk('dex',state.dexAt);
   })
   .catch(function(){
@@ -641,7 +642,7 @@ function fetchRpc(){
     if(!Array.isArray(arr))throw new Error('rpc shape');
     var by={};arr.forEach(function(x){by[x.id]=x.result});
     var supply=hexToBig(by[1]),dec=Number(hexToBig(by[2])),burned=hexToBig(by[3]);
-    if(supply<=0n||dec>36)throw new Error('rpc values');
+    if(supply<=0n||dec>36||burned>supply)throw new Error('rpc values');
     state.supply=supply;state.burned=burned;state.decimals=dec;state.rpcAt=Date.now();state.rpcOk=true;
     renderSupply();tagOk('rpc',state.rpcAt);
   })
@@ -677,13 +678,14 @@ function calc(){
   var raw=(holdIn.value||'').replace(/[,\s_]/g,'');
   var f=burnFigures();var src=f.live?'live supply':'snapshot supply';
   if(!raw){holdOut.innerHTML='—<small>your share of unburned supply · not a yield estimate</small>';return}
+  if(!/^\d+(\.\d+)?$/.test(raw)){holdOut.innerHTML='—<small>numbers only.</small>';return}
   var n=Number(raw);
-  if(!isFinite(n)||n<0){holdOut.innerHTML='—<small>numbers only.</small>';return}
+  if(!isFinite(n)||!isFinite(n*1e6)||n<0){holdOut.innerHTML='—<small>numbers only.</small>';return}
   var supply=state.supply?state.supply-state.burned:SNAP.supply-SNAP.supply*BigInt(Math.round(SNAP.burnPct*100))/10000n;
   var dec=state.supply?state.decimals:SNAP.decimals;
   if(supply<=0n){holdOut.innerHTML='—<small>supply unavailable</small>';return}
   var share=Number(toWei(n,dec)*100000000n/supply)/1000000; // % with 6 dp
-  var txt=share>=100?'100%+ (that is more than exists)':share===0?'0%':(share<0.0001?'<0.0001':sig3.format(share))+'%';
+  var txt=share>100?'100%+ (that is more than exists)':share>=100?'100%':(share>0&&share<0.0001)||(share===0&&n>0)?'<0.0001%':share===0?'0%':sig3.format(share)+'%';
   holdOut.innerHTML=txt+'<small>of unburned supply · '+src+' · not a yield estimate</small>';
 }
 holdIn.addEventListener('input',calc);

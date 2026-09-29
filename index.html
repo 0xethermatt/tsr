@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tibbir Reserve ($TSR) — the Reserve for TIBBIR holders</title>
+<meta name="description" content="Tibbir Reserve ($TSR) on Base. Hold TSR, accumulate TIBBIR from trading fees while part of every fee burns TSR. Live stats, mechanism, transparency and how to buy.">
+<meta name="theme-color" content="#07070D">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://tibbirreserve.xyz/"><!-- TODO: confirm final domain -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tibbir Reserve ($TSR)">
+<meta property="og:description" content="Hold TSR. Stack TIBBIR. The decentralized strategic reserve of TIBBIR holders, on Base.">
+<meta property="og:image" content="https://tibbirreserve.xyz/assets/banner.png"><!-- TODO: confirm final domain; banner is 3:1, a 1200x630 og.png would avoid card cropping -->
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@TibbirReserve">
+<meta name="twitter:title" content="Tibbir Reserve ($TSR)">
+<meta name="twitter:description" content="Hold TSR. Stack TIBBIR. Slowly, then all at once.">
+<meta name="twitter:image" content="https://tibbirreserve.xyz/assets/banner.png">
+<link rel="icon" href="./assets/logo.png" type="image/png">
+<link rel="apple-touch-icon" href="./assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#07070D;--surface:#0E0E1A;--line:rgba(255,255,255,.08);
+  --text:#EDEBE4;--muted:#8A8AA0;--gold:#D9B25F;--gold-hi:#F3D98B;
+  --iri:linear-gradient(90deg,#FF4FD8,#7A5CFF,#2FD3FF,#41F2A0,#FFD84D);
+  --live:#41F2A0;--warn:#E5484D;
+  --display:"Cinzel",Georgia,"Times New Roman",serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --r:16px;--max:1120px;--t:.2s ease;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 var(--body);overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.1;margin:0;letter-spacing:.01em}
+h2{font-size:clamp(1.6rem,1.2rem + 2vw,2.4rem);color:var(--gold)}
+h3{font-size:1.05rem;font-family:var(--body);font-weight:600}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+code,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+section{padding:64px 0;position:relative}
+.sec-head{max-width:640px;margin-bottom:32px}
+.sec-head p{color:var(--muted);margin-top:12px}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.tag{display:inline-flex;align-items:flex-start;gap:6px;font:500 11px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);min-width:0;max-width:100%}
+.tag::before{content:"";width:6px;height:6px;margin-top:4px;border-radius:50%;background:var(--muted);flex:none}
+.tag.live::before{background:var(--live);animation:pulse 2s ease-in-out infinite}
+.tag.live{color:var(--live)}
+.tag.stale::before{background:var(--muted)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--text);font-weight:600;text-decoration:none;transition:background var(--t),border-color var(--t),transform var(--t)}
+.btn:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.03)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#120F06}
+.btn.gold:hover{background:var(--gold-hi);border-color:var(--gold-hi)}
+.btn.sm{min-height:36px;padding:0 14px;font-size:14px}
+
+/* sky */
+.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.glow{position:absolute;top:-20vh;right:-10vw;width:70vmax;height:70vmax;border-radius:50%;background:radial-gradient(circle,rgba(217,178,95,.14),rgba(217,178,95,.04) 35%,transparent 62%)}
+.acacia{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;fill:rgba(255,255,255,.045)}
+.stars{position:absolute;top:0;left:0;width:1px;height:1px;border-radius:50%;background:#fff;opacity:.55;
+box-shadow:3vw 8vh 0 0 #fff,11vw 21vh 0 0 #fff,19vw 5vh 0 .5px #fff,27vw 33vh 0 0 #fff,35vw 12vh 0 0 #fff,43vw 27vh 0 .5px #fff,51vw 6vh 0 0 #fff,59vw 18vh 0 0 #fff,67vw 31vh 0 0 #fff,75vw 9vh 0 .5px #fff,83vw 24vh 0 0 #fff,91vw 14vh 0 0 #fff,97vw 36vh 0 0 #fff,7vw 42vh 0 0 #fff,15vw 55vh 0 .5px #fff,23vw 48vh 0 0 #fff,31vw 61vh 0 0 #fff,39vw 44vh 0 0 #fff,47vw 58vh 0 0 #fff,55vw 40vh 0 .5px #fff,63vw 52vh 0 0 #fff,71vw 46vh 0 0 #fff,79vw 60vh 0 0 #fff,87vw 43vh 0 0 #fff,95vw 57vh 0 .5px #fff,5vw 70vh 0 0 #fff,13vw 83vh 0 0 #fff,21vw 76vh 0 0 #fff,29vw 90vh 0 .5px #fff,37vw 74vh 0 0 #fff,45vw 88vh 0 0 #fff,53vw 79vh 0 0 #fff,61vw 93vh 0 0 #fff,69vw 72vh 0 .5px #fff,77vw 86vh 0 0 #fff,85vw 78vh 0 0 #fff,93vw 91vh 0 0 #fff,2vw 27vh 0 0 #fff,9vw 15vh 0 0 #fff,17vw 64vh 0 .5px #fff,25vw 19vh 0 0 #fff,33vw 96vh 0 0 #fff,41vw 2vh 0 0 #fff,49vw 68vh 0 0 #fff,57vw 29vh 0 .5px #fff,65vw 4vh 0 0 #fff,73vw 65vh 0 0 #fff,81vw 35vh 0 0 #fff,89vw 3vh 0 0 #fff,99vw 75vh 0 .5px #fff,4vw 97vh 0 0 #fff,12vw 37vh 0 0 #fff,20vw 82vh 0 0 #fff,28vw 7vh 0 0 #fff,36vw 51vh 0 .5px #fff,44vw 16vh 0 0 #fff,52vw 94vh 0 0 #fff,60vw 71vh 0 0 #fff,68vw 22vh 0 0 #fff,76vw 50vh 0 .5px #fff}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(7,7,13,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:16px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.brand img,.brand .moonlet{width:36px;height:36px;border-radius:50%;flex:none}
+.moonlet{background:radial-gradient(circle at 38% 35%,#fff8e1,var(--gold) 55%,#7a6230);box-shadow:0 0 18px rgba(217,178,95,.35);display:none}
+.brand.nologo img{display:none}.brand.nologo .moonlet{display:block}
+.wordmark{font-family:var(--display);font-weight:900;font-size:15px;letter-spacing:.06em;color:var(--gold);text-shadow:0 1px 0 rgba(0,0,0,.6),0 0 1px var(--gold-hi);white-space:nowrap}
+.wordmark .mr{display:inline-block;transform:scaleX(-1)}
+.menu{display:flex;align-items:center;gap:6px;list-style:none;margin:0;padding:0}
+.menu a:not(.btn){display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:500;font-size:15px;transition:color var(--t),background var(--t)}
+.menu a:not(.btn):hover{color:var(--text);background:rgba(255,255,255,.04)}
+.menu a.x{padding:0 10px}
+.burger{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:transparent;align-items:center;justify-content:center}
+.burger span{position:relative;width:18px;height:2px;background:var(--text);display:block}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--text)}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+@media (max-width:767px){
+  .burger{display:inline-flex}
+  .menu{display:none;position:absolute;left:0;right:0;top:64px;flex-direction:column;align-items:stretch;padding:12px 16px 16px;background:rgba(7,7,13,.96);border-bottom:1px solid var(--line)}
+  .nav.open .menu{display:flex}
+  .menu a:not(.btn){min-height:48px}
+  .menu .btn{margin-top:8px}
+}
+
+/* hero */
+.hero{padding:56px 0 48px;overflow:hidden;position:relative}
+.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.42;-webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.6) 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.6) 55%,transparent 100%)}
+.hero-bg.noimg img{display:none}
+.hero .wrap{display:grid;gap:32px;align-items:center;grid-template-columns:minmax(0,1fr);position:relative}
+.art{position:relative;aspect-ratio:1/1;width:min(52vw,200px);margin:0 auto 8px;order:-1}
+.art img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:1px solid var(--line);box-shadow:0 0 48px rgba(217,178,95,.18);animation:float 12s ease-in-out infinite}
+.moon{display:none;width:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 36%,#fff9e6 0%,#f3d98b 22%,#d9b25f 52%,#6f5a2a 100%);box-shadow:0 0 60px rgba(243,217,139,.25),0 0 140px rgba(217,178,95,.18);animation:float 12s ease-in-out infinite}
+.art.noimg img{display:none}.art.noimg .moon{display:block}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-size:clamp(2.2rem,1.4rem + 4.5vw,4rem);color:var(--gold);font-weight:900}
+.hero h1 .accent{color:var(--text)}
+.sub{font-size:clamp(1.05rem,1rem + .5vw,1.25rem);color:var(--text);margin-top:16px;max-width:520px}
+.tagline{font-family:var(--display);color:var(--muted);margin-top:12px;font-size:1rem;letter-spacing:.04em}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.chip{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:6px 6px 6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);position:relative;max-width:100%}
+.chip::before{content:"";position:absolute;inset:-1px;border-radius:999px;padding:1px;background:var(--iri);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity var(--t);pointer-events:none}
+.chip:hover::before,.chip:focus-within::before{opacity:1}
+.chip code{font-size:14px;color:var(--text)}
+.chip .lbl{font:500 11px/1 var(--mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.ico{width:32px;height:32px;border-radius:999px;border:1px solid var(--line);background:transparent;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);transition:color var(--t),border-color var(--t);text-decoration:none}
+.ico:hover{color:var(--text);border-color:rgba(255,255,255,.22)}
+.ico svg{width:15px;height:15px}
+@media (min-width:768px){
+  .hero{padding:96px 0 72px}
+  .hero .wrap{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
+  .art{order:0;width:min(34vw,400px);margin:0 0 0 auto}
+}
+
+/* live strip */
+.strip{padding:0 0 32px}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;min-height:104px;display:flex;flex-direction:column;gap:6px}
+.tile .k{font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font:500 clamp(1.15rem,1rem + .8vw,1.5rem)/1.2 var(--mono);color:var(--text);min-height:1.2em}
+.tile .v.iri{background:var(--iri);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tile .d{font-size:12px;color:var(--muted);font-family:var(--mono)}
+.tile .d.up{color:var(--live)}.tile .d.down{color:#FF7A7A}
+.tile .tag{margin-top:auto}
+.tile.burn,.tile.cd{grid-column:1/-1}
+.tile{min-width:0}.tile .v{overflow-wrap:anywhere}
+.tile.burn .v{font-size:clamp(1.9rem,1.3rem + 2.6vw,2.8rem)}
+@media (min-width:768px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}.tile.burn{grid-column:span 2}.tile.cd{grid-column:span 2}}
+@media (min-width:1024px){.tiles{grid-template-columns:repeat(7,minmax(0,1fr))}.tile.cd{grid-column:span 1}}
+
+/* how it works */
+.how{display:grid;gap:24px;grid-template-columns:minmax(0,1fr)}
+.fly{max-width:560px;width:100%;margin:0 auto;height:auto}
+.fly .nd rect{fill:var(--surface);stroke:var(--line)}
+.fly .nd text{fill:var(--text);font:500 21px var(--body);text-anchor:middle}
+.fly .nd.small text{font-size:18px}
+.fly .fee circle{fill:var(--surface);stroke:rgba(255,255,255,.28);stroke-width:1.5}
+.fly .fee text{fill:var(--text);font:500 28px var(--mono);text-anchor:middle}
+.fly .fee text.s{fill:var(--muted);font:500 16px var(--body)}
+.fly .ln{fill:none;stroke:var(--muted);stroke-width:1.5;marker-end:url(#ar)}
+.fly .ln.ret{stroke-dasharray:6 6;opacity:.7}
+.fly .note{fill:var(--muted);font:500 17px var(--body);text-anchor:middle}
+.inwords{font:500 13px/1.7 var(--mono);color:var(--muted);text-align:center;margin-top:12px;padding:0 8px}
+.split{display:grid;gap:12px}
+.split .row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.split .row:first-of-type{border-top:0;padding-top:0}
+.split .row b{font-weight:600}
+.split .row span{color:var(--muted);text-align:right}
+.calc{margin-top:16px}
+.calc label{display:block;font-weight:600;margin-bottom:8px}
+.calc .in{display:flex;gap:8px;align-items:stretch}
+.calc input{flex:1;min-width:0;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:500 16px var(--mono)}
+.calc input:focus{border-color:rgba(255,255,255,.25);outline:none}
+.calc .out{margin-top:12px;font:500 1.35rem/1.2 var(--mono);color:var(--text)}
+.calc .out small{display:block;font:400 13px/1.5 var(--body);color:var(--muted);margin-top:4px}
+@media (min-width:900px){.how{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:start}}
+
+/* tibbir */
+.lore{display:grid;gap:24px;grid-template-columns:minmax(0,1fr)}
+.lore p+p{margin-top:12px}
+.tib{display:inline-block;font-family:var(--display);font-weight:900;color:var(--gold);transition:transform .3s ease;cursor:default}
+.tib:hover{transform:scaleX(-1)}
+.lore .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.avatar{width:120px;height:120px;border-radius:50%;border:1px solid var(--line);object-fit:cover;background:var(--surface)}
+@media (min-width:768px){.lore{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* iridescent divider (1 of 3 uses) */
+.divider{height:1px;max-width:var(--max);margin:0 auto;background:var(--iri);opacity:.55}
+
+/* transparency */
+.grid2{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.bar{display:flex;height:14px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.05);margin:16px 0}
+.bar i{display:block;height:100%;transition:width .3s ease}
+.bar .lp{background:#5B7BD6}.bar .bn{background:#C25E5E}.bar .dv{background:#8A8AA0}.bar .cr{background:#2A2A44}
+.legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;list-style:none;padding:0;margin:0}
+.legend li{display:flex;flex-direction:column;gap:2px;font-size:14px}
+.legend .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;vertical-align:middle}
+.legend .val{font-family:var(--mono);font-weight:500}
+.legend .tag{margin-top:2px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:14px;margin-top:12px}
+.kv dt{color:var(--muted);margin:0}.kv dd{margin:0;font-family:var(--mono);text-align:right}
+.prog{height:8px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin:16px 0 8px}
+.prog i{display:block;height:100%;width:0;background:rgba(237,235,228,.6);transition:width .3s ease}
+.big{font:500 1.6rem/1.1 var(--mono);color:var(--text)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th,.tbl td{text-align:left;padding:12px 8px;border-top:1px solid var(--line);vertical-align:middle}
+.tbl th{color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-family:var(--mono);border-top:0}
+.tbl td.act{white-space:nowrap;text-align:right}
+.tbl code{font-size:13px;word-break:break-all}
+.tbl .ico{width:30px;height:30px;margin-left:4px}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:0}
+.list li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:14px}
+.list li:first-child{border-top:0;padding-top:0}
+.list li span:last-child{font-family:var(--mono);text-align:right}
+@media (max-width:520px){.tbl thead{display:none}.tbl tr{display:grid;grid-template-columns:1fr auto;border-top:1px solid var(--line);padding:10px 0}.tbl td{border:0;padding:4px 0}.tbl td:first-child{grid-column:1/-1;font-weight:600}.tbl td.act{grid-column:2;grid-row:2}}
+
+/* how to buy */
+.steps{counter-reset:s;display:grid;gap:12px;grid-template-columns:minmax(0,1fr);list-style:none;padding:0;margin:0}
+.steps li{position:relative;padding:24px 24px 24px 64px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);position:absolute;left:20px;top:22px;font:700 20px var(--display);color:var(--muted)}
+.steps h3{margin-bottom:6px}
+.steps p{color:var(--muted);font-size:15px}
+.warn{margin-top:16px;padding:16px 20px;border:1px solid var(--warn);border-radius:var(--r);color:var(--text);display:flex;gap:12px;align-items:flex-start;font-size:15px}
+.warn svg{width:20px;height:20px;flex:none;color:var(--warn);margin-top:2px}
+@media (min-width:768px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* faq */
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:600;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:500 20px var(--mono);color:var(--muted);transition:transform var(--t)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .a{padding:0 0 20px;color:var(--muted);max-width:720px}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:14px}
+footer .row{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
+footer ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:4px 16px}
+footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--text)}
+footer .ca{margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+footer .ca code{font-size:12px;word-break:break-all;color:var(--text)}
+footer .disc{margin-top:20px;font-size:13px}
+
+/* toast + reveal */
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,12px);background:var(--surface);border:1px solid var(--line);color:var(--text);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:opacity var(--t),transform var(--t);z-index:60}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.rv{opacity:0;transform:translateY(12px);transition:opacity .3s ease,transform .3s ease}
+.rv.in{opacity:1;transform:none}
+.no-io .rv{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+  .tib:hover{transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"><div class="glow"></div><div class="stars"></div><svg class="acacia" viewBox="0 0 1200 160" preserveAspectRatio="xMidYMax slice"><path d="M0 160V150H1200V160ZM160 150V112L150 96C110 92 84 84 78 70c14-8 52-10 84-4 22-16 66-18 96-10 12 4 20 12 22 22-16 8-46 12-76 10L180 112v38ZM980 150V104L964 90c-40 2-74-8-82-22 18-10 66-10 102 0 26-14 74-14 104-4 8 4 14 12 14 20-20 8-54 10-90 6l-22 14v46Z"/></svg></div>
+<a class="sr" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Tibbir Reserve, home">
+      <img src="./assets/logo.png" width="36" height="36" alt="" onerror="this.closest('.brand').classList.add('nologo')">
+      <span class="moonlet" aria-hidden="true"></span>
+      <span class="wordmark" role="img" aria-label="Tibbir Reserve">TIBBIR <span class="mr" aria-hidden="true">R</span>ESERVE</span>
+    </a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span></span></button>
+    <ul class="menu" id="menu">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#tibbir">TIBBIR</a></li>
+      <li><a href="#transparency">Transparency</a></li>
+      <li><a class="x" href="https://x.com/TibbirReserve" target="_blank" rel="noopener" aria-label="Tibbir Reserve on X"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.6l-5.2-6.8L5.3 22H2.2l7.7-8.8L1.8 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L7.4 3.9H5.5L17.7 20z"/></svg></a></li>
+      <li><a class="btn gold sm" href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">Buy $TSR</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="h1">
+  <div class="hero-bg" aria-hidden="true"><img src="./assets/banner.png" width="1200" height="400" alt="" loading="eager" decoding="async" onerror="this.parentNode.classList.add('noimg')"></div>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">$TSR · on Base</p>
+      <h1 id="h1">Hold TSR.<br><span class="accent">Stack TIBBIR.</span></h1>
+      <p class="sub">Every $TSR trade pays a 3.3% fee. It buys $TIBBIR for holders and burns $TSR.</p>
+      <p class="tagline">Slowly, then all at once.</p>
+      <div class="chip">
+        <span class="lbl">CA</span>
+        <code id="caShort" title="0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222">0x9C69…e222</code>
+        <button class="ico copy" type="button" data-copy="0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" aria-label="Copy contract address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+        <a class="ico" href="https://basescan.org/token/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="View contract on Basescan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
+      </div>
+      <div class="ctas">
+        <a class="btn gold" href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">Buy $TSR</a>
+        <a class="btn" href="https://dexscreener.com/base/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">Chart</a>
+      </div>
+    </div>
+    <div class="art">
+      <img src="./assets/logo.png" width="512" height="512" alt="TIBBIR, a rainbow chameleon-frog in oversized black glasses, arms crossed" loading="eager" fetchpriority="high" onerror="this.closest('.art').classList.add('noimg')">
+      <div class="moon" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE STRIP -->
+<section class="strip" aria-label="Live stats">
+  <div class="wrap">
+    <div class="tiles" id="tiles">
+      <div class="tile"><span class="k">Price</span><span class="v" data-v="price">—</span><span class="d" data-v="chg"></span><span class="tag" data-tag="dex">loading</span></div>
+      <div class="tile"><span class="k">Mcap</span><span class="v" data-v="mcap">—</span><span class="tag" data-tag="dex">loading</span></div>
+      <div class="tile"><span class="k">Liquidity</span><span class="v" data-v="liq">—</span><span class="tag" data-tag="dex">loading</span></div>
+      <div class="tile"><span class="k">24h Vol</span><span class="v" data-v="vol">—</span><span class="tag" data-tag="dex">loading</span></div>
+      <div class="tile burn"><span class="k">TSR burned · forever</span><span class="v iri" data-v="burn">—</span><span class="d" data-v="burnPct"></span><span class="tag" data-tag="rpc">loading</span></div>
+      <div class="tile cd"><span class="k">Dev unlock in</span><span class="v" data-v="cd" aria-live="off">—</span><span class="d">6 Sept 2027 · UTC</span><span class="tag">clock</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" aria-labelledby="howH">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Mechanism</p>
+      <h2 id="howH">How the Reserve works</h2>
+      <p>One fee, two jobs. Every trade feeds TIBBIR to holders and shrinks the TSR supply at the same time.</p>
+    </div>
+    <div class="how">
+      <div class="rv">
+        <svg class="fly" viewBox="0 0 700 660" role="img" aria-labelledby="flyT flyD">
+          <title id="flyT">The Reserve flywheel</title>
+          <desc id="flyD">A loop: trade TSR, a 3.3% fee is taken. One part buys TIBBIR which is reflected to holders. The other part burns TSR, supply shrinks and each holder's share grows. Then it repeats.</desc>
+          <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5 0 10z" fill="#8A8AA0"/></marker></defs>
+          <path class="ln" d="M350 160V266"/>
+          <path class="ln" d="M402 300L436 280"/>
+          <path class="ln" d="M298 300L264 280"/>
+          <path class="ln" d="M523 260V398"/>
+          <path class="ln" d="M177 260V398"/>
+          <path class="ln" d="M480 460L406 500"/>
+          <path class="ln" d="M220 460L294 500"/>
+          <path class="ln ret" d="M436 540C715 540 715 120 440 130"/>
+          <text class="note" x="600" y="98">…and again</text>
+          <g class="nd" transform="translate(350 130)"><rect x="-85" y="-30" width="170" height="60" rx="14"/><text y="7">Trade $TSR</text></g>
+          <g class="fee" transform="translate(350 330)"><circle r="60"/><text y="-2">3.3%</text><text class="s" y="24">fee</text></g>
+          <g class="nd" transform="translate(523 230)"><rect x="-85" y="-30" width="170" height="60" rx="14"/><text y="7">Buys $TIBBIR</text></g>
+          <g class="nd" transform="translate(523 430)"><rect x="-85" y="-30" width="170" height="60" rx="14"/><text y="-4">Reflected</text><text y="20">to holders</text></g>
+          <g class="nd" transform="translate(177 230)"><rect x="-85" y="-30" width="170" height="60" rx="14"/><text y="7">Burns $TSR</text></g>
+          <g class="nd" transform="translate(177 430)"><rect x="-85" y="-30" width="170" height="60" rx="14"/><text y="-4">Supply</text><text y="20">shrinks ↓</text></g>
+          <g class="nd" transform="translate(350 530)"><rect x="-85" y="-30" width="170" height="60" rx="14"/><text y="-4">Your share</text><text y="20">of supply ↑</text></g>
+        </svg>
+        <p class="inwords">trade → 3.3% fee → buy TIBBIR → reflect · burn TSR → supply ↓ → your share of supply ↑ → repeat</p>
+      </div>
+      <div class="rv">
+        <div class="card">
+          <h3>Where the fee goes</h3>
+          <div class="split" style="margin-top:12px">
+            <div class="row"><b>Buy fee</b><span class="mono">3.3%</span></div>
+            <div class="row"><b>Sell fee</b><span class="mono">3.3%</span></div>
+            <div class="row"><b>→ $TIBBIR reflections</b><span>part of every fee</span></div>
+            <div class="row"><b>→ $TSR burn</b><span>part of every fee</span></div>
+          </div>
+          <!-- TODO: confirm exact fee split % (reflections vs burn vs other) from basestonk "Where the fee goes" and replace "part of every fee" with the numbers -->
+          <p style="margin-top:12px;font-size:13px;color:var(--muted)">The exact split is published on <a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">basestonk</a> under “Where the fee goes”.</p>
+        </div>
+        <div class="card calc">
+          <label for="hold">I hold</label>
+          <div class="in">
+            <input id="hold" type="text" inputmode="decimal" placeholder="1,000,000" autocomplete="off" aria-describedby="holdOut">
+            <span class="btn sm" style="pointer-events:none" aria-hidden="true">TSR</span>
+          </div>
+          <p class="out" id="holdOut" aria-live="polite">—<small>your share of unburned supply · not a yield estimate</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIBBIR -->
+<section id="tibbir" aria-labelledby="tibH">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">The story</p>
+      <h2 id="tibH">What is <span class="tib" aria-label="TIBBIR">TIBBIR</span>?</h2>
+      <p>RIBBIT, read in a mirror. A rainbow chameleon-frog in oversized black glasses, arms crossed. Unbothered.</p>
+    </div>
+    <div class="lore">
+      <div class="card rv">
+        <img class="avatar" src="./assets/logo.png" width="120" height="120" alt="TIBBIR logo" loading="lazy" onerror="this.style.display='none'">
+        <h3 style="margin-top:16px">The frog</h3>
+        <p style="color:var(--muted);margin-top:8px">TIBBIR is a Base memecoin: a rainbow chameleon-frog, a pixel sidekick with green hair and a “T” chain, and a full moon it refuses to stop staring at. The full lore is TIBBIR’s to tell.</p>
+        <!-- TODO: confirm TIBBIR origin story, launch date, TIBBIR CA and official channel links from fetched sources; add the "TIBBIR on X" button below once confirmed -->
+        <div class="links">
+          <a class="btn sm" href="https://x.com/TibbirReserve" target="_blank" rel="noopener">Reserve on X</a>
+        </div>
+      </div>
+      <div class="card rv">
+        <h3>Why a Reserve</h3>
+        <p style="color:var(--muted);margin-top:8px">Most people want more TIBBIR without watching charts all day. TSR turns its own trading activity into a standing TIBBIR position for its holders, with part of every fee burning TSR along the way.</p>
+        <p style="color:var(--muted)">The decentralized strategic reserve of TIBBIR holders. Not a treasury with a key. A contract with a rule.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<!-- TRANSPARENCY -->
+<section id="transparency" aria-labelledby="trH">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Transparency</p>
+      <h2 id="trH">Onchain, or it didn’t happen</h2>
+      <p>Values marked <span class="tag live">live</span> are read from Base every 60 seconds. Values marked <span class="tag">snapshot</span> are from basestonk as of 29 Sept 2026.</p>
+    </div>
+    <div class="grid2">
+      <div class="card rv">
+        <h3>Supply</h3>
+        <div class="bar" role="img" aria-label="Supply breakdown bar" id="bar">
+          <i class="lp" style="width:12.86%"></i><i class="bn" data-seg="bn" style="width:5.55%"></i><i class="dv" style="width:4.77%"></i><i class="cr" data-seg="cr" style="width:76.82%"></i>
+        </div>
+        <ul class="legend">
+          <li><span><span class="sw" style="background:#5B7BD6"></span>Liquidity pool</span><span class="val">12.86%</span><span class="tag">snapshot</span></li>
+          <li><span><span class="sw" style="background:#C25E5E"></span>Burned</span><span class="val" data-v="burnPct2">5.55%</span><span class="tag" data-tag="rpc">loading</span></li>
+          <li><span><span class="sw" style="background:#8A8AA0"></span>Dev locked</span><span class="val">4.77%</span><span class="tag">snapshot</span></li>
+          <li><span><span class="sw" style="background:#2A2A44"></span>Circulating</span><span class="val" data-v="circPct">76.82%</span><span class="tag" data-tag="calc">calculated</span></li>
+        </ul>
+        <dl class="kv">
+          <dt>Total supply</dt><dd><span data-v="supply">≈1B TSR</span> <span class="tag" data-tag="rpc">loading</span></dd>
+          <dt>Burn address</dt><dd><code>0x…dEaD</code></dd>
+        </dl>
+        <!-- TODO: verify total supply via totalSupply(); snapshot implies ~1B -->
+      </div>
+      <div class="card rv">
+        <h3>Dev lock</h3>
+        <p class="big" style="margin-top:12px">47.71M TSR <span class="tag">snapshot</span></p>
+        <p style="color:var(--muted);font-size:14px;margin-top:4px">The dev buy. 4.8% of supply, locked for twelve months. Nobody gets to be early twice.</p>
+        <div class="prog" role="progressbar" aria-label="Lock period elapsed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="lockProg"><i></i></div>
+        <dl class="kv">
+          <dt>Released</dt><dd>0% <span class="tag">snapshot</span></dd>
+          <dt>Time elapsed</dt><dd><span data-v="elapsed">—</span> <span class="tag live">live</span></dd>
+          <dt>Start</dt><dd>6 Sept 2026</dd>
+          <dt>End</dt><dd>6 Sept 2027</dd>
+        </dl>
+        <!-- TODO: confirm release schedule (cliff at end vs linear) and lock contract address from basestonk -->
+        <p style="color:var(--muted);font-size:13px;margin-top:12px">Release schedule (cliff vs linear) is listed on basestonk. The bar above shows time, not tokens.</p>
+      </div>
+    </div>
+
+    <div class="card rv" style="margin-top:16px">
+      <h3>Contracts &amp; wallets</h3>
+      <table class="tbl" style="margin-top:12px">
+        <thead><tr><th>Label</th><th>Address</th><th class="act">Links</th></tr></thead>
+        <tbody>
+          <tr><td>$TSR token</td><td><code>0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222</code></td><td class="act"><button class="ico copy" type="button" data-copy="0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" aria-label="Copy token address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><a class="ico" href="https://basescan.org/token/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="Token on Basescan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
+          <tr><td>Burn address</td><td><code>0x000000000000000000000000000000000000dEaD</code></td><td class="act"><button class="ico copy" type="button" data-copy="0x000000000000000000000000000000000000dEaD" aria-label="Copy burn address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><a class="ico" href="https://basescan.org/token/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222?a=0x000000000000000000000000000000000000dEaD" target="_blank" rel="noopener" aria-label="Burn address on Basescan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
+          <tr id="lpRow"><td>Liquidity pool</td><td><code data-v="pair">read from DexScreener…</code></td><td class="act"><span class="tag" data-tag="dex">loading</span><button class="ico copy" type="button" data-copy="" aria-label="Copy pool address" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><a class="ico" href="https://dexscreener.com/base/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="Pool on Basescan" data-v="pairLink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
+          <tr><td>Dev lock (vesting)</td><td><span style="color:var(--muted)">address listed on basestonk</span></td><td class="act"><span class="tag">snapshot</span><a class="ico" href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="Vesting contract on basestonk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
+          <!-- TODO: basestonk lists 4 contracts/wallets. Confirm labels and addresses (vesting/lock contract, LP, fee router or other) and replace the two unconfirmed rows -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card rv" style="margin-top:16px">
+      <h3>Launch config</h3>
+      <ul class="list" style="margin-top:12px">
+        <li><span>Launchpad</span><span>basestonk</span></li>
+        <li><span>Buy fee</span><span>3.3%</span></li>
+        <li><span>Sell fee</span><span>3.3%</span></li>
+        <li><span>Fee routing</span><span>TIBBIR reflections + TSR burn</span></li>
+        <li><span>Dev buy</span><span>47.71M TSR · locked 6 Sept 2026 → 6 Sept 2027</span></li>
+      </ul>
+      <!-- TODO: basestonk shows 5 active launch-config items. Confirm the exact labels/values and replace this list one-to-one -->
+      <p style="color:var(--muted);font-size:13px;margin-top:12px"><span class="tag">snapshot</span> · full config on <a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">basestonk</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO BUY -->
+<section id="buy" aria-labelledby="buyH">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Get in</p>
+      <h2 id="buyH">How to buy $TSR</h2>
+      <p>Four steps. The fourth one is the one people skip and regret.</p>
+    </div>
+    <ol class="steps rv">
+      <li><h3>Get a wallet</h3><p>Any Base-compatible wallet works: Coinbase Wallet, Rabby, MetaMask. Write the seed phrase down, not in a screenshot.</p></li>
+      <li><h3>Put ETH on Base</h3><p>Bridge from Ethereum or withdraw straight to Base from an exchange that supports it. You need a little extra for gas.</p></li>
+      <li><h3>Open the basestonk page</h3><p>Trade from the official <a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">$TSR page on basestonk</a>. The 3.3% fee applies on every buy and sell.</p></li>
+      <li><h3>Verify the CA</h3><p>Compare the contract address character by character before you sign. Same ticker does not mean same token.</p></li>
+    </ol>
+    <div class="warn rv" role="note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+      <div><b>This is the only official CA. Beware of fakes.</b><br><code style="font-size:13px;word-break:break-all">0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222</code></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" aria-labelledby="faqH">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">FAQ</p>
+      <h2 id="faqH">Questions, answered dryly</h2>
+    </div>
+    <div class="faq rv">
+      <details><summary>What is TSR?</summary><div class="a">Tibbir Reserve is a token on Base. Hold it and you accumulate $TIBBIR from the fees on TSR trades. Part of the same fee burns TSR, so the supply only goes one way.</div></details>
+      <details><summary>How do I receive TIBBIR?</summary><div class="a">Reflections come from the fee routing in the contract. Whether they land in your wallet automatically or need a claim is stated on the basestonk page. Check there before you assume.<!-- TODO: confirm auto-distribution vs claim from basestonk / X --></div></details>
+      <details><summary>Why burn?</summary><div class="a">Burned TSR goes to the dead address and never comes back. Fewer TSR in existence means each remaining TSR is a larger slice of future reflections. Simple, boring, permanent.</div></details>
+      <details><summary>Is the dev supply locked?</summary><div class="a">Yes. The dev buy of 47.71M TSR (4.8% of supply) is locked from 6 Sept 2026 to 6 Sept 2027, with 0% released as of 29 Sept 2026. The countdown at the top runs to the unlock date.</div></details>
+      <details><summary>What are the fees?</summary><div class="a">3.3% on buys and 3.3% on sells. The fee is what funds the TIBBIR reflections and the TSR burn. No fee, no reserve.</div></details>
+      <details><summary>Where can I trade?</summary><div class="a">On the <a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">basestonk page</a>, or through any Base DEX aggregator that routes to the pool. Chart on <a href="https://dexscreener.com/base/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">DexScreener</a>. Verify the CA either way.</div></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <span class="wordmark" role="img" aria-label="Tibbir Reserve">TIBBIR <span class="mr" aria-hidden="true">R</span>ESERVE</span>
+      <ul>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#tibbir">TIBBIR</a></li>
+        <li><a href="#transparency">Transparency</a></li>
+        <li><a href="#buy">Buy</a></li>
+        <li><a href="https://x.com/TibbirReserve" target="_blank" rel="noopener">X</a></li>
+        <li><a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">basestonk</a></li>
+        <li><a href="https://basescan.org/token/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">Basescan</a></li>
+      </ul>
+    </div>
+    <div class="ca"><span class="tag">CA</span><code>0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222</code><button class="ico copy" type="button" data-copy="0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" aria-label="Copy contract address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
+    <p class="disc">Not financial advice. Memecoins are volatile. DYOR. Nothing here promises a return. © <span id="year"></span> Tibbir Reserve · the CA is right above this line, ser.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+var CA='0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222';
+var DEAD='0x000000000000000000000000000000000000dEaD';
+// source: basestonk token page snapshot, 29 Sept 2026 (LP 12.86%, burned 5.55%, vesting 4.77%; total supply implied ~1B)
+var SNAP={label:'snapshot · 29 Sept 2026',burnPct:5.55,lpPct:12.86,vestPct:4.77,supply:1000000000n*10n**18n,decimals:18};
+var LOCK_START=Date.UTC(2026,8,6),LOCK_END=Date.UTC(2027,8,6); // TODO: confirm lock timestamps (UTC assumed)
+var REFRESH=60000,STALE=180000;
+var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+var state={supply:null,burned:null,decimals:18,rpcAt:0,dexAt:0,rpcOk:false,dexOk:false};
+
+/* ---------- formatting ---------- */
+var compact=new Intl.NumberFormat('en-US',{notation:'compact',maximumFractionDigits:1});
+var pct2=new Intl.NumberFormat('en-US',{maximumFractionDigits:2,minimumFractionDigits:2});
+var sig3=new Intl.NumberFormat('en-US',{maximumSignificantDigits:3});
+var fix2=new Intl.NumberFormat('en-US',{maximumFractionDigits:2});
+function usd(n){return isFinite(n)&&n>=0?'$'+compact.format(n):null}
+function price(p){if(!isFinite(p)||p<=0)return null;return '$'+(p>=1?fix2.format(p):sig3.format(p))}
+function tokens(wei,dec){var d=BigInt(dec);var whole=wei/10n**d;var frac=(wei%10n**d)*1000n/10n**d;return Number(whole)+Number(frac)/1000}
+function toWei(n,dec){var d=BigInt(dec);var micro=BigInt(Math.round(n*1e6));return d>=6n?micro*10n**(d-6n):micro/10n**(6n-d)}
+
+/* ---------- tags ---------- */
+function setTag(name,kind,text){$$('[data-tag="'+name+'"]').forEach(function(el){el.className='tag'+(kind==='live'?' live':kind==='stale'?' stale':'');el.textContent=text})}
+function tagOk(name,at){var age=Date.now()-at;if(age>STALE)setTag(name,'stale','stale · '+Math.round(age/60000)+'m');else setTag(name,'live','live')}
+
+/* ---------- counters ---------- */
+var ticked={};
+function setV(name,text){$$('[data-v="'+name+'"]').forEach(function(el){el.textContent=text})}
+function tick(name,value,fmt){
+  var els=$$('[data-v="'+name+'"]');if(!els.length)return;
+  if(reduced||ticked[name]||!isFinite(value)){els.forEach(function(e){e.textContent=fmt(value)});ticked[name]=true;return}
+  ticked[name]=true;var t0=performance.now(),D=700;
+  (function step(t){var k=Math.min(1,(t-t0)/D);k=1-Math.pow(1-k,3);var v=value*k;els.forEach(function(e){e.textContent=fmt(v)});if(k<1)requestAnimationFrame(step)})(t0);
+}
+
+/* ---------- DexScreener ---------- */
+function fetchDex(){
+  var ctrl=typeof AbortController!=='undefined'?new AbortController():null;
+  var timer=ctrl&&setTimeout(function(){ctrl.abort()},8000);
+  return fetch('https://api.dexscreener.com/latest/dex/tokens/'+CA,{signal:ctrl?ctrl.signal:undefined})
+  .then(function(r){if(!r.ok)throw new Error('dex '+r.status);return r.json()})
+  .then(function(j){
+    var pairs=(j&&j.pairs||[]).filter(function(p){return p.chainId==='base'&&p.baseToken&&p.baseToken.address.toLowerCase()===CA.toLowerCase()});
+    if(!pairs.length)throw new Error('no base pair');
+    pairs.sort(function(a,b){return ((b.liquidity&&b.liquidity.usd)||0)-((a.liquidity&&a.liquidity.usd)||0)});
+    var p=pairs[0];
+    var pr=parseFloat(p.priceUsd),mc=Number(p.marketCap||p.fdv),lq=Number(p.liquidity&&p.liquidity.usd),vl=Number(p.volume&&p.volume.h24),ch=Number(p.priceChange&&p.priceChange.h24);
+    setV('price',price(pr)||'—');
+    tick('mcap',mc,function(v){return usd(v)||'—'});
+    tick('liq',lq,function(v){return usd(v)||'—'});
+    tick('vol',vl,function(v){return usd(v)||'—'});
+    var chEl=$('[data-v="chg"]');
+    if(isFinite(ch)){chEl.textContent=(ch>=0?'+':'')+fix2.format(ch)+'% 24h';chEl.className='d '+(ch>=0?'up':'down')}else{chEl.textContent='';chEl.className='d'}
+    if(p.pairAddress){setV('pair',p.pairAddress);var lp=$('#lpRow');var cb=$('.copy',lp);cb.hidden=false;cb.setAttribute('data-copy',p.pairAddress);$('[data-v="pairLink"]').href='https://basescan.org/address/'+p.pairAddress}
+    state.dexAt=Date.now();state.dexOk=true;tagOk('dex',state.dexAt);
+  })
+  .catch(function(){
+    if(!state.dexOk){
+      setV('price','—');setV('mcap','—');setV('liq','—');setV('vol','—');
+      $('[data-v="chg"]').textContent='market data offline';
+      setV('pair','see DexScreener (offline)');
+      setTag('dex','snap','offline');
+      // TODO: snapshot price/mcap/liquidity/volume values were not available in the brief; nothing invented here
+    }else tagOk('dex',state.dexAt);
+  })
+  .finally(function(){clearTimeout(timer)});
+}
+
+/* ---------- Base RPC ---------- */
+function hexToBig(h){if(typeof h!=='string'||!/^0x[0-9a-fA-F]*$/.test(h)||h.length<3)throw new Error('bad hex');return BigInt(h)}
+function fetchRpc(){
+  var ctrl=typeof AbortController!=='undefined'?new AbortController():null;
+  var timer=ctrl&&setTimeout(function(){ctrl.abort()},8000);
+  var bal='0x70a08231'+'0'.repeat(24)+DEAD.slice(2).toLowerCase();
+  var body=[
+    {jsonrpc:'2.0',id:1,method:'eth_call',params:[{to:CA,data:'0x18160ddd'},'latest']},
+    {jsonrpc:'2.0',id:2,method:'eth_call',params:[{to:CA,data:'0x313ce567'},'latest']},
+    {jsonrpc:'2.0',id:3,method:'eth_call',params:[{to:CA,data:bal},'latest']}
+  ];
+  return fetch('https://mainnet.base.org',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),signal:ctrl?ctrl.signal:undefined})
+  .then(function(r){if(!r.ok)throw new Error('rpc '+r.status);return r.json()})
+  .then(function(arr){
+    if(!Array.isArray(arr))throw new Error('rpc shape');
+    var by={};arr.forEach(function(x){by[x.id]=x.result});
+    var supply=hexToBig(by[1]),dec=Number(hexToBig(by[2])),burned=hexToBig(by[3]);
+    if(supply<=0n||dec>36)throw new Error('rpc values');
+    state.supply=supply;state.burned=burned;state.decimals=dec;state.rpcAt=Date.now();state.rpcOk=true;
+    renderSupply();tagOk('rpc',state.rpcAt);
+  })
+  .catch(function(){
+    if(!state.rpcOk){renderSupply();setTag('rpc','snap',SNAP.label)}else tagOk('rpc',state.rpcAt);
+  })
+  .finally(function(){clearTimeout(timer)});
+}
+function burnFigures(){
+  if(state.supply&&state.burned!==null){
+    var bp=Number(state.burned*1000000n/state.supply)/10000; // % with 4 dp
+    return {burned:tokens(state.burned,state.decimals),pct:bp,supply:tokens(state.supply,state.decimals),live:true};
+  }
+  var s=tokens(SNAP.supply,SNAP.decimals);
+  return {burned:s*SNAP.burnPct/100,pct:SNAP.burnPct,supply:s,live:false};
+}
+function renderSupply(){
+  var f=burnFigures();
+  tick('burn',f.burned,function(v){return compact.format(v)+' TSR'});
+  setV('burnPct',pct2.format(f.pct)+'% of supply');
+  setV('burnPct2',pct2.format(f.pct)+'%');
+  setV('supply',(f.live?'':'≈')+compact.format(f.supply)+' TSR');
+  var circ=Math.max(0,100-SNAP.lpPct-SNAP.vestPct-f.pct);
+  setV('circPct',pct2.format(circ)+'%');
+  $('[data-seg="bn"]').style.width=f.pct+'%';$('[data-seg="cr"]').style.width=circ+'%';
+  $('#bar').setAttribute('aria-label','Supply: liquidity '+SNAP.lpPct+'%, burned '+pct2.format(f.pct)+'%, dev locked '+SNAP.vestPct+'%, circulating '+pct2.format(circ)+'%');
+  calc();
+}
+
+/* ---------- calculator ---------- */
+var holdIn=$('#hold'),holdOut=$('#holdOut');
+function calc(){
+  var raw=(holdIn.value||'').replace(/[,\s_]/g,'');
+  var f=burnFigures();var src=f.live?'live supply':'snapshot supply';
+  if(!raw){holdOut.innerHTML='—<small>your share of unburned supply · not a yield estimate</small>';return}
+  var n=Number(raw);
+  if(!isFinite(n)||n<0){holdOut.innerHTML='—<small>numbers only.</small>';return}
+  var supply=state.supply?state.supply-state.burned:SNAP.supply-SNAP.supply*BigInt(Math.round(SNAP.burnPct*100))/10000n;
+  var dec=state.supply?state.decimals:SNAP.decimals;
+  var share=Number(toWei(n,dec)*100000000n/supply)/1000000; // % with 6 dp
+  var txt=share>=100?'100%+ (that is more than exists)':share===0?'0%':(share<0.0001?'<0.0001':sig3.format(share))+'%';
+  holdOut.innerHTML=txt+'<small>of unburned supply · '+src+' · not a yield estimate</small>';
+}
+holdIn.addEventListener('input',calc);
+
+/* ---------- countdown ---------- */
+var d2=function(n){return (n<10?'0':'')+n};
+function countdown(){
+  var now=Date.now(),left=LOCK_END-now;
+  if(left<=0){setV('cd','unlocked');$('#lockProg').setAttribute('aria-valuenow','100');$('#lockProg i').style.width='100%';setV('elapsed','100%');return}
+  var s=Math.floor(left/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),sec=s%60;
+  setV('cd',d+'d '+d2(h)+'h '+d2(m)+'m'+(reduced?'':' '+d2(sec)+'s'));
+  var el=Math.min(100,Math.max(0,(now-LOCK_START)/(LOCK_END-LOCK_START)*100));
+  $('#lockProg').setAttribute('aria-valuenow',String(Math.round(el)));$('#lockProg i').style.width=el+'%';setV('elapsed',fix2.format(el)+'%');
+}
+countdown();setInterval(countdown,reduced?60000:1000);
+
+/* ---------- copy ---------- */
+var toast=$('#toast'),toastT;
+function say(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){toast.classList.remove('show')},1800)}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.copy');if(!b)return;
+  var v=b.getAttribute('data-copy');if(!v)return;
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(v).then(function(){say('copied. verify it anyway.')},function(){say('copy failed, select it manually')})}
+  else say('copy not supported here, select it manually');
+});
+
+/* ---------- nav ---------- */
+var nav=$('#nav'),burger=$('#burger');
+function closeMenu(){nav.classList.remove('open');burger.setAttribute('aria-expanded','false')}
+burger.addEventListener('click',function(){var o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',String(o))});
+$$('#menu a').forEach(function(a){a.addEventListener('click',closeMenu)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){closeMenu();burger.focus()}});
+
+/* ---------- reveal ---------- */
+if('IntersectionObserver' in window&&!reduced){
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  $$('.rv').forEach(function(el){io.observe(el)});
+}else document.documentElement.classList.add('no-io');
+
+/* ---------- boot ---------- */
+$('#year').textContent=String(new Date().getFullYear());
+function refresh(){if(document.hidden)return;fetchDex();fetchRpc()}
+refresh();setInterval(refresh,REFRESH);
+document.addEventListener('visibilitychange',function(){if(!document.hidden)refresh()});
+})();
+</script>
+</body>
+</html>

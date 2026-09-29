@@ -15,11 +15,13 @@
 <meta property="og:image" content="https://tibbirreserve.xyz/assets/banner.png"><!-- TODO: confirm final domain; banner is 3:1, a 1200x630 og.png would avoid card cropping -->
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="400">
+<meta property="og:image:alt" content="Tibbir Reserve banner: a gold full moon over an acacia silhouette">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TibbirReserve">
 <meta name="twitter:title" content="Tibbir Reserve ($TSR)">
 <meta name="twitter:description" content="Hold TSR. Stack TIBBIR. Slowly, then all at once.">
 <meta name="twitter:image" content="https://tibbirreserve.xyz/assets/banner.png"><!-- TODO: confirm final domain -->
+<meta name="twitter:image:alt" content="Tibbir Reserve banner: a gold full moon over an acacia silhouette">
 <link rel="icon" href="./assets/logo.png" type="image/png">
 <link rel="apple-touch-icon" href="./assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,11 +34,12 @@
   --text:#EDEBE4;--muted:#8A8AA0;--gold:#D9B25F;--gold-hi:#F3D98B;
   --iri:linear-gradient(90deg,#FF4FD8,#7A5CFF,#2FD3FF,#41F2A0,#FFD84D);
   --live:#41F2A0;--warn:#E5484D;
-  --display:"Cinzel",Georgia,"Times New Roman",serif;
+  --display:"Cinzel","Cinzel Fallback",Georgia,"Times New Roman",serif;
   --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --r:16px;--max:1120px;--t:.2s ease;
 }
+@font-face{font-family:"Cinzel Fallback";src:local("Georgia"),local("Times New Roman");size-adjust:118%;ascent-override:92%;descent-override:26%;line-gap-override:0%}/* TODO: tune size-adjust against the real Cinzel metrics */
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 var(--body);overflow-x:hidden}
@@ -74,14 +77,14 @@ section{padding:64px 0;position:relative;scroll-margin-top:8px}
 /* sky */
 .sky{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .glow{position:absolute;top:-20vh;right:-10vw;width:70vmax;height:70vmax;border-radius:50%;background:radial-gradient(circle,rgba(217,178,95,.14),rgba(217,178,95,.04) 35%,transparent 62%)}
-.acacia{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;fill:rgba(255,255,255,.045)}
+.acacia{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;fill:rgba(255,255,255,.07)}
 .stars{position:absolute;top:0;left:0;width:1px;height:1px;border-radius:50%;background:#fff;opacity:.55;
 box-shadow:3vw 8vh 0 0 #fff,11vw 21vh 0 0 #fff,19vw 5vh 0 .5px #fff,27vw 33vh 0 0 #fff,35vw 12vh 0 0 #fff,43vw 27vh 0 .5px #fff,51vw 6vh 0 0 #fff,59vw 18vh 0 0 #fff,67vw 31vh 0 0 #fff,75vw 9vh 0 .5px #fff,83vw 24vh 0 0 #fff,91vw 14vh 0 0 #fff,97vw 36vh 0 0 #fff,7vw 42vh 0 0 #fff,15vw 55vh 0 .5px #fff,23vw 48vh 0 0 #fff,31vw 61vh 0 0 #fff,39vw 44vh 0 0 #fff,47vw 58vh 0 0 #fff,55vw 40vh 0 .5px #fff,63vw 52vh 0 0 #fff,71vw 46vh 0 0 #fff,79vw 60vh 0 0 #fff,87vw 43vh 0 0 #fff,95vw 57vh 0 .5px #fff,5vw 70vh 0 0 #fff,13vw 83vh 0 0 #fff,21vw 76vh 0 0 #fff,29vw 90vh 0 .5px #fff,37vw 74vh 0 0 #fff,45vw 88vh 0 0 #fff,53vw 79vh 0 0 #fff,61vw 93vh 0 0 #fff,69vw 72vh 0 .5px #fff,77vw 86vh 0 0 #fff,85vw 78vh 0 0 #fff,93vw 91vh 0 0 #fff,2vw 27vh 0 0 #fff,9vw 15vh 0 0 #fff,17vw 64vh 0 .5px #fff,25vw 19vh 0 0 #fff,33vw 96vh 0 0 #fff,41vw 2vh 0 0 #fff,49vw 68vh 0 0 #fff,57vw 29vh 0 .5px #fff,65vw 4vh 0 0 #fff,73vw 65vh 0 0 #fff,81vw 35vh 0 0 #fff,89vw 3vh 0 0 #fff,99vw 75vh 0 .5px #fff,4vw 97vh 0 0 #fff,12vw 37vh 0 0 #fff,20vw 82vh 0 0 #fff,28vw 7vh 0 0 #fff,36vw 51vh 0 .5px #fff,44vw 16vh 0 0 #fff,52vw 94vh 0 0 #fff,60vw 71vh 0 0 #fff,68vw 22vh 0 0 #fff}
 
 /* nav */
 .nav{position:sticky;top:0;z-index:50;background:rgba(7,7,13,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:16px;min-height:64px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.brand{display:flex;align-items:center;gap:8px;text-decoration:none;margin-right:auto}
 .brand img,.brand .moonlet{width:36px;height:36px;border-radius:50%;flex:none}
 .moonlet{background:radial-gradient(circle at 38% 35%,#fff8e1,var(--gold) 55%,#7a6230);box-shadow:0 0 18px rgba(217,178,95,.35);display:none}
 .brand.nologo img{display:none}.brand.nologo .moonlet{display:block}
@@ -118,7 +121,8 @@ box-shadow:3vw 8vh 0 0 #fff,11vw 21vh 0 0 #fff,19vw 5vh 0 .5px #fff,27vw 33vh 0 
 .hero h1{font-size:clamp(2.2rem,1.4rem + 4.5vw,4rem);color:var(--gold);font-weight:900}
 .hero h1 .accent{color:var(--text)}
 .sub{font-size:clamp(1.05rem,1rem + .5vw,1.25rem);color:var(--text);margin-top:16px;max-width:520px}
-.tagline{font-family:var(--display);font-weight:700;color:var(--muted);margin-top:12px;font-size:1rem;letter-spacing:.04em}
+.tagline{font-family:var(--display);font-weight:700;color:var(--muted);margin-top:12px;font-size:1rem;letter-spacing:.04em;position:relative;margin-bottom:1.5em}
+.tagline::after{content:attr(data-mirror);content:attr(data-mirror) / "";position:absolute;left:0;top:100%;transform:scaleY(-1);opacity:.28;-webkit-mask-image:linear-gradient(0deg,#000,transparent 70%);mask-image:linear-gradient(0deg,#000,transparent 70%);pointer-events:none;white-space:nowrap}
 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
 .chip{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:6px 6px 6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);position:relative;max-width:100%}
 .chip::before{content:"";position:absolute;inset:-1px;border-radius:999px;padding:1px;background:var(--iri);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity var(--t);pointer-events:none}
@@ -139,16 +143,15 @@ box-shadow:3vw 8vh 0 0 #fff,11vw 21vh 0 0 #fff,19vw 5vh 0 .5px #fff,27vw 33vh 0 
 .tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;min-height:104px;min-width:0;display:flex;flex-direction:column;gap:6px}
 .tile .k{font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.tile .v{font:500 clamp(1.15rem,1rem + .8vw,1.5rem)/1.2 var(--mono);color:var(--text);min-height:1.2em}
+.tile .v{font:500 clamp(1.15rem,1rem + .8vw,1.5rem)/1.2 var(--mono);color:var(--text);min-height:1.2em;overflow-wrap:anywhere}
 .tile .v.iri{background:var(--iri);-webkit-background-clip:text;background-clip:text;color:transparent}
-.tile .d{font-size:12px;color:var(--muted);font-family:var(--mono)}
+.tile .d{font-size:12px;color:var(--muted);font-family:var(--mono);min-height:1.6em}
 .tile .d.up{color:var(--live)}.tile .d.down{color:#FF7A7A}
 .tile .tag{margin-top:auto}
 .tile.burn,.tile.cd{grid-column:1/-1}
-.tile .v{overflow-wrap:anywhere}
 .tile.burn .v{font-size:clamp(1.9rem,1.3rem + 2.6vw,2.8rem)}
 @media (min-width:768px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}.tile.burn{grid-column:span 2}.tile.cd{grid-column:span 2}}
-@media (min-width:1024px){.tiles{grid-template-columns:repeat(8,minmax(0,1fr))}.tile.burn{grid-column:span 2}.tile.cd{grid-column:span 2}.tile.cd .v{white-space:nowrap;font-size:clamp(1.15rem,.9rem + .6vw,1.4rem)}.tile.burn .v{font-size:clamp(1.9rem,1.3rem + 2.6vw,2.4rem)}}
+@media (min-width:1024px){.tile.cd .v{white-space:nowrap}}
 
 /* how it works */
 .how{display:grid;gap:24px;grid-template-columns:minmax(0,1fr)}
@@ -195,7 +198,7 @@ box-shadow:3vw 8vh 0 0 #fff,11vw 21vh 0 0 #fff,19vw 5vh 0 .5px #fff,27vw 33vh 0 
 .bar{display:flex;height:14px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.05);margin:16px 0}
 .bar i{display:block;height:100%;transition:width .3s ease}
 .bar .lp{background:#5B7BD6}.bar .bn{background:#C25E5E}.bar .dv{background:#8A8AA0}.bar .cr{background:#41416A}
-.legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;list-style:none;padding:0;margin:0}
+.legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px;list-style:none;padding:0;margin:0}
 .legend li{display:flex;flex-direction:column;gap:2px;font-size:14px}
 .legend .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;vertical-align:middle}
 .legend .val{font-family:var(--mono);font-weight:500}
@@ -220,17 +223,18 @@ box-shadow:3vw 8vh 0 0 #fff,11vw 21vh 0 0 #fff,19vw 5vh 0 .5px #fff,27vw 33vh 0 
 /* how to buy */
 .steps{counter-reset:s;display:grid;gap:12px;grid-template-columns:minmax(0,1fr);list-style:none;padding:0;margin:0}
 .steps li{position:relative;padding:24px 24px 24px 64px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
-.steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);position:absolute;left:20px;top:22px;font:700 20px var(--display);color:var(--muted)}
+.steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);position:absolute;left:20px;top:24px;font:700 20px var(--display);color:var(--muted)}
 .steps h3{margin-bottom:6px}
 .steps p{color:var(--muted);font-size:15px}
 .warn{margin-top:16px;padding:16px 20px;border:1px solid var(--warn);border-radius:var(--r);color:var(--text);display:flex;gap:12px;align-items:flex-start;font-size:15px}
 .warn svg{width:20px;height:20px;flex:none;color:var(--warn);margin-top:2px}
 @media (min-width:768px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1024px){.steps{grid-template-columns:repeat(4,minmax(0,1fr))}.steps li{padding:56px 20px 24px 20px}.steps li::before{left:20px;top:20px}}
 
 /* faq */
 .faq details{border-top:1px solid var(--line)}
 .faq details:last-child{border-bottom:1px solid var(--line)}
-.faq summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:600;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:600;display:flex;justify-content:space-between;gap:16px;align-items:center}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{content:"+";font:500 20px var(--mono);color:var(--muted);transition:transform var(--t)}
 .faq details[open] summary::after{transform:rotate(45deg)}
@@ -256,6 +260,7 @@ footer .disc{margin-top:20px;font-size:13px}
   .tib:hover{transform:none}
 }
 </style>
+<noscript><style>.burger{display:none}@media (max-width:767px){.menu{display:flex;position:static;flex-direction:row;flex-wrap:wrap;padding:0;border:0;background:none}}</style></noscript>
 </head>
 <body>
 <div class="sky" aria-hidden="true"><div class="glow"></div><div class="stars"></div><svg class="acacia" viewBox="0 0 1200 160" preserveAspectRatio="xMidYMax slice"><path d="M0 160V150H1200V160ZM160 150V112L150 96C110 92 84 84 78 70c14-8 52-10 84-4 22-16 66-18 96-10 12 4 20 12 22 22-16 8-46 12-76 10L180 112v38ZM980 150V104L964 90c-40 2-74-8-82-22 18-10 66-10 102 0 26-14 74-14 104-4 8 4 14 12 14 20-20 8-54 10-90 6l-22 14v46Z"/></svg></div>
@@ -292,7 +297,7 @@ footer .disc{margin-top:20px;font-size:13px}
       <p class="eyebrow">$TSR · on Base</p>
       <h1 id="h1">Hold TSR.<br><span class="accent">Stack TIBBIR.</span></h1>
       <p class="sub">Every $TSR trade pays a 3.3% fee. It buys $TIBBIR for holders and burns $TSR.</p>
-      <p class="tagline">Slowly, then all at once.</p>
+      <p class="tagline" data-mirror="Slowly, then all at once.">Slowly, then all at once.</p>
       <div class="chip">
         <span class="lbl">CA</span>
         <code id="caShort" title="0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222">0x9C69…e222</code>
@@ -319,8 +324,8 @@ footer .disc{margin-top:20px;font-size:13px}
       <div class="tile"><span class="k">Mcap</span><span class="v" data-v="mcap">—</span><span class="tag" data-tag="dex">loading</span></div>
       <div class="tile"><span class="k">Liquidity</span><span class="v" data-v="liq">—</span><span class="tag" data-tag="dex">loading</span></div>
       <div class="tile"><span class="k">24h Vol</span><span class="v" data-v="vol">—</span><span class="tag" data-tag="dex">loading</span></div>
-      <div class="tile burn"><span class="k">TSR burned</span><span class="v iri" data-v="burn">—</span><span class="d" data-v="burnPct"></span><span class="tag" data-tag="rpc">loading</span></div>
-      <div class="tile cd"><span class="k">Dev unlock in</span><span class="v" data-v="cd" aria-live="off">—</span><span class="d">6 Sept 2027 · UTC</span><span class="tag">clock</span></div>
+      <div class="tile burn"><span class="k">TSR burned</span><span class="v iri" data-v="burn">≈55.5M TSR</span><span class="d" data-v="burnPct">5.55% of supply</span><span class="tag" data-tag="rpc">snapshot · 29 Sept 2026</span></div>
+      <div class="tile cd"><span class="k">Dev unlock in</span><span class="v" data-v="cd" aria-live="off">—</span><span class="d">6 Sept 2027 · UTC</span><span class="tag">clock</span></div><!-- TODO: confirm lock timestamps and timezone (UTC assumed) -->
     </div>
   </div>
 </section>
@@ -340,8 +345,8 @@ footer .disc{margin-top:20px;font-size:13px}
           <desc id="flyD">A loop: trade TSR, a 3.3% fee is taken. One part buys TIBBIR which is reflected to holders. The other part burns TSR, supply shrinks and each holder's share grows. Then it repeats.</desc>
           <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5 0 10z" fill="#8A8AA0"/></marker></defs>
           <path class="ln" d="M350 160V266"/>
-          <path class="ln" d="M402 300L436 280"/>
-          <path class="ln" d="M298 300L264 280"/>
+          <path class="ln" d="M402 300L446 262"/>
+          <path class="ln" d="M298 300L254 262"/>
           <path class="ln" d="M523 260V398"/>
           <path class="ln" d="M177 260V398"/>
           <path class="ln" d="M480 460L406 500"/>
@@ -371,7 +376,7 @@ footer .disc{margin-top:20px;font-size:13px}
           <p style="margin-top:12px;font-size:13px;color:var(--muted)">The exact split is published on <a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">basestonk</a> under “Where the fee goes”.</p>
         </div>
         <div class="card calc">
-          <label for="hold">I hold</label>
+          <label for="hold">I hold <span class="sr">(TSR)</span></label>
           <div class="in">
             <input id="hold" type="text" inputmode="decimal" placeholder="1,000,000" autocomplete="off" aria-describedby="holdOut">
             <span class="btn sm" style="pointer-events:none" aria-hidden="true">TSR</span>
@@ -395,16 +400,16 @@ footer .disc{margin-top:20px;font-size:13px}
       <div class="card rv">
         <img class="avatar" src="./assets/logo.png" width="120" height="120" alt="TIBBIR logo" loading="lazy" onerror="this.style.display='none'">
         <h3 style="margin-top:16px">The frog</h3>
-        <p style="color:var(--muted);margin-top:8px">TIBBIR is the token the Reserve accumulates: a rainbow chameleon-frog, a pixel sidekick with green hair and a “T” chain, and a full moon it refuses to stop staring at. The full lore is TIBBIR’s to tell.</p>
+        <p style="color:var(--muted);margin-top:8px">TIBBIR is the token the Reserve accumulates: a rainbow chameleon-frog, a pixel sidekick with green hair and a “T” chain, and a full moon it refuses to stop staring at. The Reserve does not retell the lore. It accumulates the token.</p>
         <!-- TODO: confirm TIBBIR origin story, launch date, TIBBIR CA and official channel links from fetched sources; add the "TIBBIR on X" button below once confirmed -->
         <div class="links">
-          <a class="btn sm" href="https://x.com/TibbirReserve" target="_blank" rel="noopener">Reserve on X</a>
+          <a class="btn sm" href="https://x.com/TibbirReserve" target="_blank" rel="noopener">$TSR on X</a>
         </div>
       </div>
       <div class="card rv">
         <h3>Why a Reserve</h3>
-        <p style="color:var(--muted);margin-top:8px">Most people want more TIBBIR without watching charts all day. TSR turns its own trading activity into a standing TIBBIR position for its holders, with part of every fee burning TSR along the way.</p>
-        <p style="color:var(--muted)">The decentralized strategic reserve of TIBBIR holders. A contract with a rule.</p><!-- TODO: only claim "no admin key" / renounced ownership after verifying owner() on Basescan -->
+        <p style="color:var(--muted);margin-top:8px">Buying TIBBIR once is easy. Buying it every day is a job. TSR turns its own trading activity into a standing TIBBIR position for holders, with part of every fee burning TSR along the way.</p>
+        <p style="color:var(--muted)">The decentralized strategic reserve of TIBBIR holders. Its whole policy fits in one fee.</p><!-- TODO: only claim "no admin key" / renounced ownership after verifying owner() on Basescan -->
       </div>
     </div>
   </div>
@@ -418,7 +423,7 @@ footer .disc{margin-top:20px;font-size:13px}
     <div class="sec-head rv">
       <p class="eyebrow">Transparency</p>
       <h2 id="trH">Onchain, or it didn’t happen</h2>
-      <p>Values marked <span class="tag live">live</span> refresh every 60 seconds from DexScreener (market) and the Base RPC (supply). Values marked <span class="tag">snapshot</span> are from basestonk as of 29 Sept 2026. Values marked <span class="tag">clock</span> come from your device time.</p>
+      <p>Values marked <span class="tag live">live</span> refresh every 60 seconds from DexScreener (market) and the Base RPC (supply). Values marked <span class="tag">snapshot</span> are from basestonk as of 29 Sept 2026. Values marked <span class="tag">clock</span> come from your device time. <span class="tag">calculated</span> is derived from the figures next to it (100% minus pool, burned and dev-locked). <span class="tag">offline</span> means a live source could not be reached and no number is shown in its place. <span class="tag stale">stale</span> shows minutes since the last successful refresh.</p>
     </div>
     <div class="grid2">
       <div class="card rv">
@@ -428,12 +433,12 @@ footer .disc{margin-top:20px;font-size:13px}
         </div>
         <ul class="legend">
           <li><span><span class="sw" style="background:#5B7BD6"></span>Liquidity pool</span><span class="val">12.86%</span><span class="tag">snapshot</span></li>
-          <li><span><span class="sw" style="background:#C25E5E"></span>Burned</span><span class="val" data-v="burnPct2">5.55%</span><span class="tag" data-tag="rpc">loading</span></li>
+          <li><span><span class="sw" style="background:#C25E5E"></span>Burned</span><span class="val" data-v="burnPct2">5.55%</span><span class="tag" data-tag="rpc">snapshot · 29 Sept 2026</span></li>
           <li><span><span class="sw" style="background:#8A8AA0"></span>Dev locked</span><span class="val">4.77%</span><span class="tag">snapshot</span></li>
           <li><span><span class="sw" style="background:#41416A"></span>Circulating</span><span class="val" data-v="circPct">76.82%</span><span class="tag" data-tag="calc">calculated</span></li>
         </ul>
         <dl class="kv">
-          <dt>Total supply</dt><dd><span data-v="supply">≈1B TSR</span> <span class="tag" data-tag="rpc">loading</span></dd>
+          <dt>Total supply</dt><dd><span data-v="supply" title="Implied by the basestonk percentages until totalSupply() is read live">≈1B TSR</span> <span class="tag" data-tag="rpc">snapshot · 29 Sept 2026</span></dd>
           <dt>Burn address</dt><dd><code>0x…dEaD</code></dd>
         </dl>
         <!-- TODO: verify total supply via totalSupply(); snapshot implies ~1B -->
@@ -450,19 +455,19 @@ footer .disc{margin-top:20px;font-size:13px}
           <dt>End</dt><dd>6 Sept 2027</dd>
         </dl>
         <!-- TODO: confirm release schedule (cliff at end vs linear) and lock contract address from basestonk -->
-        <p style="color:var(--muted);font-size:13px;margin-top:12px">Release schedule (cliff vs linear) is listed on basestonk. The bar above shows time, not tokens.</p>
+        <p style="color:var(--muted);font-size:13px;margin-top:12px">Check basestonk for the release schedule (cliff vs linear). The bar above shows time, not tokens.</p>
       </div>
     </div>
 
     <div class="card rv" style="margin-top:16px">
       <h3>Contracts &amp; wallets</h3>
       <table class="tbl" style="margin-top:12px">
-        <thead><tr><th>Label</th><th>Address</th><th class="act">Links</th></tr></thead>
+        <thead><tr><th scope="col">Label</th><th scope="col">Address</th><th scope="col" class="act">Links</th></tr></thead>
         <tbody>
           <tr><td>$TSR token</td><td><code>0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222</code></td><td class="act"><button class="ico copy" type="button" data-copy="0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" aria-label="Copy token address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><a class="ico" href="https://basescan.org/token/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="Token on Basescan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
           <tr><td>Burn address</td><td><code>0x000000000000000000000000000000000000dEaD</code></td><td class="act"><button class="ico copy" type="button" data-copy="0x000000000000000000000000000000000000dEaD" aria-label="Copy burn address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><a class="ico" href="https://basescan.org/token/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222?a=0x000000000000000000000000000000000000dEaD" target="_blank" rel="noopener" aria-label="Burn address on Basescan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
           <tr id="lpRow"><td>Liquidity pool</td><td><code data-v="pair">read from DexScreener…</code></td><td class="act"><span class="tag" data-tag="dex">loading</span><button class="ico copy" type="button" data-copy="" aria-label="Copy pool address" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><a class="ico" href="https://dexscreener.com/base/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="Pool on DexScreener" data-v="pairLink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
-          <tr><td>Dev lock (vesting)</td><td><span style="color:var(--muted)">address listed on basestonk</span></td><td class="act"><span class="tag">snapshot</span><a class="ico" href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="Vesting contract on basestonk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
+          <tr><td>Dev lock (vesting)</td><td><span style="color:var(--muted)">see basestonk</span></td><td class="act"><span class="tag">snapshot</span><a class="ico" href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener" aria-label="Vesting contract on basestonk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></td></tr>
           <!-- TODO: basestonk lists 4 contracts/wallets. Confirm labels and addresses (vesting/lock contract, LP, fee router or other) and replace the two unconfirmed rows -->
         </tbody>
       </table>
@@ -509,15 +514,15 @@ footer .disc{margin-top:20px;font-size:13px}
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow">FAQ</p>
-      <h2 id="faqH">Questions, answered dryly</h2>
+      <h2 id="faqH">Questions</h2>
     </div>
     <div class="faq rv">
       <details><summary>What is TSR?</summary><div class="a">Tibbir Reserve is a token on Base. Hold it and you accumulate $TIBBIR from the fees on TSR trades. Part of the same fee burns TSR, so each holder’s share of the reflections grows.</div></details>
-      <details><summary>How do I receive TIBBIR?</summary><div class="a">Reflections are funded by the trading fee. Whether they land in your wallet automatically or need a claim is stated on the basestonk page. Check there before you assume.<!-- TODO: confirm auto-distribution vs claim from basestonk / X --></div></details>
+      <details><summary>How do I receive TIBBIR?</summary><div class="a">Reflections are funded by the trading fee. Check the basestonk page and the Reserve’s X for whether they land in your wallet automatically or need a claim. Don’t assume.<!-- TODO: confirm auto-distribution vs claim from basestonk / X --></div></details>
       <details><summary>Why burn?</summary><div class="a">Burned TSR goes to the dead address and never comes back. Fewer TSR in existence means each remaining TSR is a larger slice of future reflections. Simple and boring.</div></details>
       <details><summary>Is the dev supply locked?</summary><div class="a">Yes. The dev buy of 47.71M TSR (4.77% of supply) is locked from 6 Sept 2026 to 6 Sept 2027, with 0% released as of 29 Sept 2026. The countdown at the top runs to the unlock date.</div></details>
       <details><summary>What are the fees?</summary><div class="a">3.3% on buys and 3.3% on sells. The fee is what funds the TIBBIR reflections and the TSR burn. No fee, no reserve.</div></details>
-      <details><summary>Where can I trade?</summary><div class="a">On the <a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">basestonk page</a>, or through any Base DEX aggregator that routes to the pool. Chart on <a href="https://dexscreener.com/base/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">DexScreener</a>. Verify the CA either way.</div></details>
+      <details><summary>Where can I trade?</summary><div class="a">On the <a href="https://basestonk.io/tokens/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">basestonk page</a>, or through a Base DEX that routes to the pool. Chart on <a href="https://dexscreener.com/base/0x9C6983dF8d23427A155F2A1E9C87b15c0f58e222" target="_blank" rel="noopener">DexScreener</a>. Verify the CA either way.</div></details>
     </div>
   </div>
 </section>
@@ -571,7 +576,7 @@ var sig3=new Intl.NumberFormat('en-US',{maximumSignificantDigits:3});
 var fix2=new Intl.NumberFormat('en-US',{maximumFractionDigits:2});
 function num(x){var n=typeof x==='string'?parseFloat(x):x;return typeof n==='number'&&isFinite(n)?n:NaN}
 function usd(n){return isFinite(n)&&n>=0?'$'+compact.format(n):null}
-function price(p){if(!isFinite(p)||p<=0)return null;return '$'+(p>=1?fix2.format(p):sig3.format(p))}
+function price(p){if(!isFinite(p)||p<=0)return null;if(p>=1)return '$'+fix2.format(p);if(p>=0.0001)return '$'+sig3.format(p);var z=Math.ceil(-Math.log10(p))-1,m=Math.round(p*Math.pow(10,z+3));if(m>=1000){m=Math.round(m/10);z-=1}return '$0.0'+String.fromCharCode(0x2080+Math.min(z,9))+m}
 function tokens(wei,dec){var d=BigInt(dec);var whole=wei/10n**d;var frac=(wei%10n**d)*1000n/10n**d;return Number(whole)+Number(frac)/1000}
 function toWei(n,dec){var d=BigInt(dec);var micro=BigInt(Math.round(n*1e6));return d>=6n?micro*10n**(d-6n):micro/10n**(6n-d)}
 
@@ -602,7 +607,7 @@ function fetchDex(){
     if(!pairs.length)throw new Error('no base pair');
     pairs.sort(function(a,b){return ((b.liquidity&&b.liquidity.usd)||0)-((a.liquidity&&a.liquidity.usd)||0)});
     var p=pairs[0];
-    var pr=num(p.priceUsd),mc=num(p.marketCap!=null?p.marketCap:p.fdv),lq=num(p.liquidity&&p.liquidity.usd),vl=num(p.volume&&p.volume.h24),ch=num(p.priceChange&&p.priceChange.h24);
+    var pr=num(p.priceUsd),mc=num(p.marketCap),lq=num(p.liquidity&&p.liquidity.usd),vl=num(p.volume&&p.volume.h24),ch=num(p.priceChange&&p.priceChange.h24);
     setV('price',price(pr)||'—');
     tick('mcap',mc,function(v){return usd(v)||'—'});
     tick('liq',lq,function(v){return usd(v)||'—'});
@@ -619,7 +624,7 @@ function fetchDex(){
       setV('pair','see DexScreener (offline)');
       setTag('dex','snap','offline');
       // TODO: snapshot price/mcap/liquidity/volume values were not available in the brief; nothing invented here
-    }else tagOk('dex',state.dexAt);
+    }else setTag('dex','stale','stale · '+Math.max(1,Math.round((Date.now()-state.dexAt)/60000))+'m');
   })
   .finally(function(){clearTimeout(timer);busy.dex=false});
 }
@@ -647,7 +652,7 @@ function fetchRpc(){
     renderSupply();tagOk('rpc',state.rpcAt);
   })
   .catch(function(){
-    if(!state.rpcOk){renderSupply();setTag('rpc','snap',SNAP.label)}else tagOk('rpc',state.rpcAt);
+    if(!state.rpcOk){renderSupply();setTag('rpc','snap',SNAP.label)}else setTag('rpc','stale','stale · '+Math.max(1,Math.round((Date.now()-state.rpcAt)/60000))+'m');
   })
   .finally(function(){clearTimeout(timer);busy.rpc=false});
 }
@@ -661,7 +666,7 @@ function burnFigures(){
 }
 function renderSupply(){
   var f=burnFigures();
-  tick('burn',f.burned,function(v){return compact.format(v)+' TSR'});
+  tick('burn',f.burned,function(v){return (f.live?'':'≈')+compact.format(v)+' TSR'});
   setV('burnPct',pct2.format(f.pct)+'% of supply');
   setV('burnPct2',pct2.format(f.pct)+'%');
   setV('supply',(f.live?'':'≈')+compact.format(f.supply)+' TSR');
@@ -684,9 +689,10 @@ function calc(){
   var supply=state.supply?state.supply-state.burned:SNAP.supply-SNAP.supply*BigInt(Math.round(SNAP.burnPct*100))/10000n;
   var dec=state.supply?state.decimals:SNAP.decimals;
   if(supply<=0n){holdOut.innerHTML='—<small>supply unavailable</small>';return}
-  var share=Number(toWei(n,dec)*100000000n/supply)/1000000; // % with 6 dp
-  var txt=share>100?'100%+ (that is more than exists)':share>=100?'100%':(share>0&&share<0.0001)||(share===0&&n>0)?'<0.0001%':share===0?'0%':sig3.format(share)+'%';
-  holdOut.innerHTML=txt+'<small>of unburned supply · '+src+' · not a yield estimate</small>';
+  var w=toWei(n,dec);
+  var share=Number(w*100000000n/supply)/1000000; // % with 6 dp
+  var txt=w>supply?'100%+ (that is more than exists)':w===supply?'100%':(share>0&&share<0.0001)||(share===0&&n>0)?'<0.0001%':share===0?'0%':sig3.format(share)+'%';
+  holdOut.innerHTML=txt+'<small>of unburned supply ('+src+'). Not a yield estimate.</small>';
 }
 holdIn.addEventListener('input',calc);
 
